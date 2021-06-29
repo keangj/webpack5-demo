@@ -8,14 +8,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               ['@babel/preset-env'],
-              ['@babel/preset-react', { runtime: 'classic' }]
+              ['@babel/preset-react', { runtime: 'classic' }],
+              ['@babel/preset-typescript']
             ]
           }
         }
