@@ -18,9 +18,10 @@ const cssLoaders = (...loaders) => [
 
 module.exports = {
   mode,
+  output: { filename: '[name].[contenthash].css' },
   plugins: [
     new ESLintPlugin({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })
   ],
   resolve: {
     alias: {
