@@ -8,7 +8,7 @@ module.exports = {
   })],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src/')
+      'src': path.resolve(__dirname, './src/'),
     }
   },
   module: {
@@ -26,6 +26,29 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                compileType: 'icss'
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `@import 'src/scss-vars.scss';`,
+              sassOptions: {
+                includePaths: [__dirname]
+              }
+            }
+          }
+        ]
       }
     ]
   }
