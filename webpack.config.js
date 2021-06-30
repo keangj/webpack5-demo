@@ -1,6 +1,19 @@
 const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
 
+const cssLoaders = (...loaders) => [
+  'style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      modules: {
+        compileType: 'icss'
+      }
+    }
+  },
+  ...loaders
+]
+
 module.exports = {
   mode: 'production',
   plugins: [new ESLintPlugin({
@@ -29,68 +42,35 @@ module.exports = {
       },
       {
         test: /\.less$/i,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                compileType: 'icss'
-              }
-            }
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              additionalData: `@import '~src/less-vars.less';`
-            }
+        use: cssLoaders({
+          loader: 'less-loader',
+          options: {
+            additionalData: `@import '~src/less-vars.less';`
           }
-        ]
+        })
       },
       {
         test: /\.styl(us)?$/i,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                compileType: 'icss'
-              }
-            }
-          },
-          {
-            loader: 'stylus-loader',
-            options: {
-              stylusOptions: {
-                import: [path.resolve(__dirname, 'src/stylus-vars.styl')]
-              }
+        use: cssLoaders({
+          loader: 'stylus-loader',
+          options: {
+            stylusOptions: {
+              import: [path.resolve(__dirname, 'src/stylus-vars.styl')]
             }
           }
-        ]
+        })
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                compileType: 'icss'
-              }
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              additionalData: `@import 'src/scss-vars.scss';`,
-              sassOptions: {
-                includePaths: [__dirname]
-              }
+        use: cssLoaders({
+          loader: 'sass-loader',
+          options: {
+            additionalData: `@import 'src/scss-vars.scss';`,
+            sassOptions: {
+              includePaths: [__dirname]
             }
           }
-        ]
+        })
       }
     ]
   }
