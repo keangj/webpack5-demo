@@ -28,6 +28,26 @@ module.exports = {
         }
       },
       {
+        test: /\.less$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                compileType: 'icss'
+              }
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              additionalData: `@import '~src/less-vars.less';`
+            }
+          }
+        ]
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           'style-loader',
