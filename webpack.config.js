@@ -31,6 +31,7 @@ module.exports = {
     new CleanWebpackPlugin()
   ].filter(Boolean),
   optimization: {
+    moduleIds: 'deterministic',
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
