@@ -1,10 +1,16 @@
-const ESLintPlugin = require('eslint-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   mode: 'production',
   plugins: [new ESLintPlugin({
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   })],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src/')
+    }
+  },
   module: {
     rules: [
       {
