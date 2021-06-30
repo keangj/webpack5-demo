@@ -25,6 +25,9 @@ module.exports = {
     mode === 'production' && new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new HtmlWebpackPlugin()
   ].filter(Boolean),
+  optimization: {
+    runtimeChunk: 'single'
+  },
   resolve: {
     alias: {
       'src': path.resolve(__dirname, './src/'),
