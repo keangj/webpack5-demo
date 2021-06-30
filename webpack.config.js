@@ -2,6 +2,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const mode = 'production';
 
 const cssLoaders = (...loaders) => [
@@ -19,11 +20,15 @@ const cssLoaders = (...loaders) => [
 
 module.exports = {
   mode,
-  output: { filename: '[name].[contenthash].css' },
+  output: { 
+    filename: '[name].[contenthash].css', 
+    path: path.resolve(__dirname, 'dist') 
+  },
   plugins: [
     new ESLintPlugin({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
     mode === 'production' && new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin(),
+    new CleanWebpackPlugin()
   ].filter(Boolean),
   optimization: {
     runtimeChunk: 'single'
