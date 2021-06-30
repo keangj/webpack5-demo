@@ -48,6 +48,28 @@ module.exports = {
         ]
       },
       {
+        test: /\.styl(us)?$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                compileType: 'icss'
+              }
+            }
+          },
+          {
+            loader: 'stylus-loader',
+            options: {
+              stylusOptions: {
+                import: [path.resolve(__dirname, 'src/stylus-vars.styl')]
+              }
+            }
+          }
+        ]
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           'style-loader',
