@@ -47,6 +47,7 @@ module.exports = {
     }
   },
   resolve: {
+    extensions: [".json", '.ts', '...'],  // 按顺序解析后缀
     alias: {
       'src': path.resolve(__dirname, './src/'),
     }
